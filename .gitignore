@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.vscode/
+# generated USD assets (regenerate with scripts/convert_stl_to_usd.py)
+models/usd/
+# training outputs
+logs/
+outputs/
+checkpoints/*
+!checkpoints/.gitkeep
+# Isaac Sim junk
+*.log
+.thumbs/
