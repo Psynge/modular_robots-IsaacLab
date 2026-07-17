@@ -35,7 +35,7 @@ cfg = MeshConverterCfg(
     usd_file_name="hex_module.usd",
     force_usd_conversion=True,
     make_instanceable=True,
-    collision_approximation="convexHull",
+    mesh_collision_props=schemas_cfg.MeshCollisionPropertiesCfg(mesh_approximation_name="convexHull"),
     mass_props=schemas_cfg.MassPropertiesCfg(mass=0.034),
     rigid_props=schemas_cfg.RigidBodyPropertiesCfg(),
     collision_props=schemas_cfg.CollisionPropertiesCfg(collision_enabled=True),

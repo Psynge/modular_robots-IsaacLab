@@ -68,15 +68,19 @@ modules = []
 for i, (name, pos) in enumerate(zip(MODULE_NAMES, SPAWN_POSITIONS)):
     cfg = RigidObjectCfg(
         prim_path=f"/World/module_{i}",
-        spawn=sim_utils.UsdFileCfg(
-            usd_path=USD_PATH,
-            physics_material=sim_utils.RigidBodyMaterialCfg(
-                static_friction=MODULE_FRICTION, dynamic_friction=MODULE_FRICTION
-            ),
-        ),
+        spawn=sim_utils.UsdFileCfg(usd_path=USD_PATH),
         init_state=RigidObjectCfg.InitialStateCfg(pos=pos),
     )
     modules.append(RigidObject(cfg))
+
+# module friction: UsdFileCfg no longer takes physics_material directly, so
+# spawn one shared material prim and bind it to each module.
+module_mat_cfg = sim_utils.RigidBodyMaterialCfg(
+    static_friction=MODULE_FRICTION, dynamic_friction=MODULE_FRICTION
+)
+module_mat_cfg.func("/World/Materials/module_material", module_mat_cfg)
+for i in range(len(modules)):
+    sim_utils.bind_physics_material(f"/World/module_{i}", "/World/Materials/module_material")
 
 sim.reset()
 

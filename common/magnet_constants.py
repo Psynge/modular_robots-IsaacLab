@@ -11,13 +11,14 @@ scale may behave differently under a different contact solver. Change only
 with a probe result in hand.
 """
 
-FORCE_CONSTANT = 1.332e-4
+FORCE_CONSTANT = 1.332e-4    # N·m²
 M_DEFAULT = 55.0
 M_HOLD = 25.0
 M_MAX = 100.0
 
 CUTOFF_DISTANCE = 0.030      # m — site-to-site magnetic interaction range
-CONTACT_DISTANCE = 0.004     # m — latch threshold
+CONTACT_DISTANCE = 0.004     # m — latch threshold; capped force evaluates AT this X
+MIN_DISTANCE = 0.001         # m — singularity floor on X
 
 # Seed hold for the y-axis line (re-derived after the geometry fix):
 # B3N50 / G0S50 / G3N50 / R0S50
